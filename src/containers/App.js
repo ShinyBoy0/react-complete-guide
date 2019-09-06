@@ -48,8 +48,10 @@ class App extends Component {
   togglePersonHandler = () => {
     console.log("i am reaching");
     const doesShow = this.state.showPersons;
-    this.setState({
-      showPersons: !doesShow
+    
+    /** Use PrevState */ 
+    this.setState( (prevState) => {
+      return { showPersons: !prevState.doesShow }
     })
   }
 
@@ -59,8 +61,10 @@ class App extends Component {
     const persons = [...this.state.persons];
 
     persons.splice(personIndex,1); //removes one element from the array
+    
+    /** Update the persons object to new persons  */
     this.setState({
-      persons
+      persons: persons
     })
   }
 
@@ -81,7 +85,10 @@ class App extends Component {
     let persons = null;
     if(this.state.showPersons){
 
-      persons = <Persons persons={this.state.persons} clicked={this.deletePersonHandler} changed={this.nameChangedHandler} />;
+      persons = <Persons 
+        persons={this.state.persons} 
+        clicked={this.deletePersonHandler}  
+        changed={this.nameChangedHandler} />;
       style.backgroundColor = 'red';
     }
 
